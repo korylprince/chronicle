@@ -1,0 +1,11 @@
+#!/bin/bash -x
+date
+touch /tmp/bisd_installer.log
+chmod 600 /tmp/bisd_installer.log
+exec >> /tmp/bisd_installer.log 2>&1
+echo 'tk.unstac.chronicle postinstall'
+
+launchctl unload /Library/LaunchDaemons/tk.unstac.chronicle.plist
+launchctl load /Library/LaunchDaemons/tk.unstac.chronicle.plist
+
+exit 0;

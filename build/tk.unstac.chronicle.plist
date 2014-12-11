@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple Computer//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+    <dict>
+        <key>Label</key>
+        <string>tk.unstac.chronicle</string>
+        <key>ProgramArguments</key>
+        <array>
+            <string>/usr/local/bin/chronicle</string>
+        </array>
+        <key>KeepAlive</key>
+        <true/>
+        <key>RunAtLoad</key>
+        <true/>
+        <key>StandardOutPath</key>
+        <string>/var/log/chronicle.log</string>
+        <key>StandardErrorPath</key>
+        <string>/var/log/chronicle.log</string>
+        <key>EnvironmentVariables</key>
+        <dict>
+            <key>CHRONICLE_CHRONICLER</key>
+            <string>chronicler.bullardisd.net:443</string>
+            <key>CHRONICLE_TLS</key>
+            <string>TRUE</string>
+            <key>CHRONICLE_INTERVAL</key>
+            <string>5</string>
+        </dict>
+    </dict>
+</plist>

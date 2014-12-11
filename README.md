@@ -46,6 +46,8 @@ The following Enviroment Variables are configurable:
     * `CHRONICLE_DB` ( **required** )
         * database/sql format DSN. Currently only mysql has been tested
 
+There are some sample build scripts in the `build` folder. Note that [pkggen](https://github.com/korylprince/pkggen) is required for `mkpkg.sh`.
+
 #Copyright Information#
 
 Copyright 2014 Kory Prince (korylprince at gmail dot com.)
