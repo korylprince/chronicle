@@ -20,6 +20,8 @@ The client will only work on OS X, and has only been tested on 10.9. The server 
 
 `go get github.com/korylprince/chronicle/server`
 
+`server/ddl.sql` will create the table and indexes.
+
 If you have any issues or questions, email the email address below, or open an issue at:
 https://github.com/korylprince/chronicle/issues
 

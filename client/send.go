@@ -32,6 +32,7 @@ func Submit() error {
 			return conn, err
 		}
 		req.Body = ioutil.NopCloser(&buf)
+		req.ContentLength = int64(buf.Len())
 		return conn, err
 	}
 
