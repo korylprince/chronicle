@@ -29,7 +29,15 @@ func Submit(rw http.ResponseWriter, r *http.Request) {
 	if len(addr) == 0 {
 		log.Panicln("No Remote Address set")
 	}
-	e.InternetIP = addr[0]
+	if ip := r.Header.Get("X-Forwarded-For"); ip != "" {
+		e.InternetIP = ip
+	} else {
+		addr := strings.Split(r.RemoteAddr, ":")
+		if len(addr) == 0 {
+			log.Panicln("No Remote Address set")
+		}
+		e.InternetIP = addr[0]
+	}
 	e.Time = time.Now()
 
 	err = Commit(e)

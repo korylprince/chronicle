@@ -1,3 +1,5 @@
 *.swp
 build/*.pkg
 build/chronicle
+server/server
+client/client
