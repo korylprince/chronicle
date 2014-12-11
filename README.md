@@ -14,8 +14,6 @@ The server logs this to a database along with the time and IP of the client as s
 
 The client will only work on OS X, and has only been tested on 10.9. The server will probably run anywhere.
 
-[![GoDoc](https://godoc.org/github.com/korylprince/chronicle?status.svg)](https://godoc.org/github.com/korylprince/chronicle)
-
 #Installing#
 
 `go get github.com/korylprince/chronicle/client`
@@ -27,9 +25,7 @@ https://github.com/korylprince/chronicle/issues
 
 #Usage#
 
-`godoc github.com/korylprince/chronicle`
-
-Or read the source. It's pretty simple and readable.
+Read the source. It's pretty simple and readable.
 
 The following Enviroment Variables are configurable:
 
