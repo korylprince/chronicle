@@ -17,6 +17,9 @@ go get "github.com/korylprince/macserial"
 echo Go Getting github.com/kelseyhightower/envconfig
 go get "github.com/kelseyhightower/envconfig"
 
+echo Go Getting github.com/DHowett/go-plist
+go get "github.com/DHowett/go-plist"
+
 echo Building
 go build -o chronicle ../client/*.go
 

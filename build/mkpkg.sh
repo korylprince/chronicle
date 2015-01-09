@@ -1,6 +1,6 @@
 #!/bin/bash
 
-ver="1.0"
+ver="1.1"
 
 ./build.sh
 sudo cp chronicle /usr/local/bin/chronicle
