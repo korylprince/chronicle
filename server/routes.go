@@ -13,7 +13,7 @@ import (
 
 var router http.Handler
 
-const apiPrefix = "/api/v1"
+const apiPrefix = "/api/v1.1"
 
 //Submit takes an Entry and commits it to the DB
 func Submit(rw http.ResponseWriter, r *http.Request) {

@@ -11,7 +11,7 @@ import (
 	"time"
 )
 
-const apiPrefix = "/api/v1"
+const apiPrefix = "/api/v1.1"
 
 //Submit generates an Entry and sends it to a Chronicler
 func Submit() error {
