@@ -20,6 +20,8 @@ func Validate(e *Entry) error {
 		return ValidationError(e.FullName)
 	case !checkLength(e.Serial, 32):
 		return ValidationError(e.Serial)
+	case !checkLength(e.ClientIdentifier, 64):
+		return ValidationError(e.ClientIdentifier)
 	case !checkLength(e.Hostname, 32):
 		return ValidationError(e.Hostname)
 	case !checkLength(e.IP, 15):

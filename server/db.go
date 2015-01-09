@@ -21,7 +21,7 @@ func Commit(e *Entry) error {
 	if err := Validate(e); err != nil {
 		return err
 	}
-	_, err := db.Exec("INSERT INTO chronicle(uid, username, fullname, serial, hostname, ip, internetip, time) Values(?, ?, ?, ?, ?, ?, ?, ?);",
-		e.UID, e.Username, e.FullName, e.Serial, e.Hostname, e.IP, e.InternetIP, e.Time)
+	_, err := db.Exec("INSERT INTO chronicle(uid, username, fullname, serial, clientidentifier, hostname, ip, internetip, time) Values(?, ?, ?, ?, ?, ?, ?, ?, ?);",
+		e.UID, e.Username, e.FullName, e.Serial, e.ClientIdentifier, e.Hostname, e.IP, e.InternetIP, e.Time)
 	return err
 }
