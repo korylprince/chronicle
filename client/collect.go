@@ -1,11 +1,12 @@
 package main
 
 import (
-	"github.com/korylprince/getpwd"
-	"github.com/korylprince/macserial"
 	"log"
 	"os"
 	"syscall"
+
+	"github.com/korylprince/getpwd"
+	"github.com/korylprince/macserial"
 )
 
 func getUser() (uid uint32, username, fullName string, err error) {
@@ -39,11 +40,17 @@ func Collect() *Entry {
 		host = ""
 		log.Println("Error getting host information:", err)
 	}
+	clientIdentifier, err := GetClientIdentifier()
+	if err != nil {
+		clientIdentifier = ""
+		log.Println("Error getting ClientIdentifier information:", err)
+	}
 	return &Entry{
-		UID:      uid,
-		Username: user,
-		FullName: name,
-		Serial:   serial,
-		Hostname: host,
+		UID:              uid,
+		Username:         user,
+		FullName:         name,
+		Serial:           serial,
+		ClientIdentifier: clientIdentifier,
+		Hostname:         host,
 	}
 }

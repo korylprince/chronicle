@@ -1,8 +1,9 @@
 package main
 
 import (
-	"github.com/kelseyhightower/envconfig"
 	"log"
+
+	"github.com/kelseyhightower/envconfig"
 )
 
 //Config stores configuration from the environment
