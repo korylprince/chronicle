@@ -7,6 +7,7 @@ The client will send the following data:
 * username of current user
 * full name (GECOS) of current user
 * serial number of computer
+* [munki](http://munki.github.io/munki/) ClientIdentifier
 * hostname of computer
 * local IP address of computer
 
@@ -49,6 +50,13 @@ The following Enviroment Variables are configurable:
         * database/sql format DSN. Currently only mysql has been tested
 
 There are some sample build scripts in the `build` folder. Note that [pkggen](https://github.com/korylprince/pkggen) is required for `mkpkg.sh`.
+
+#Versions#
+
+* 1.0
+    * Initial version
+* 1.1
+    * Added ClientIdentifier
 
 #Copyright Information#
 
