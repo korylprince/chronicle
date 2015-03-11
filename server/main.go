@@ -7,6 +7,7 @@ import (
 
 func init() {
 	envInit()
+	statsInit()
 	routesInit()
 	dbInit()
 }

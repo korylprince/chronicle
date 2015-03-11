@@ -2,13 +2,14 @@ package main
 
 import (
 	"encoding/json"
-	"github.com/gorilla/handlers"
-	"github.com/gorilla/mux"
 	"log"
 	"net/http"
 	"os"
 	"strings"
 	"time"
+
+	"github.com/gorilla/handlers"
+	"github.com/gorilla/mux"
 )
 
 var router http.Handler
@@ -57,5 +58,6 @@ func Submit(rw http.ResponseWriter, r *http.Request) {
 func routesInit() {
 	r := mux.NewRouter()
 	r.Handle(apiPrefix+"/submit", http.HandlerFunc(Submit)).Methods("POST")
-	router = handlers.CompressHandler(handlers.CombinedLoggingHandler(os.Stdout, r))
+	r.Handle("/stats", http.HandlerFunc(StatsHandler)).Methods("GET")
+	router = httpStats.Handler(handlers.CompressHandler(handlers.CombinedLoggingHandler(os.Stdout, r)))
 }
