@@ -2,6 +2,7 @@ package main
 
 import (
 	"encoding/json"
+	"fmt"
 	"log"
 	"net/http"
 	"os"
@@ -15,6 +16,36 @@ import (
 var router http.Handler
 
 const apiPrefix = "/api/v1.1"
+
+type forwardedHandler struct {
+	chain http.Handler
+}
+
+//ForwardedHandler replaces the Remote Address with the X-Forwarded-For header if it exists
+func ForwardedHandler(h http.Handler) http.Handler {
+	return forwardedHandler{h}
+}
+
+func (h forwardedHandler) ServeHTTP(rw http.ResponseWriter, r *http.Request) {
+	addr := strings.Split(r.RemoteAddr, ":")
+	if len(addr) != 2 {
+		log.Panicln("No Remote Address set")
+	}
+
+	if ip := r.Header.Get("X-Forwarded-For"); ip != "" {
+		r.RemoteAddr = fmt.Sprintf("%s:%s", ip, addr)
+	}
+
+	h.chain.ServeHTTP(rw, r)
+}
+
+//middleware
+func middleware(h http.Handler) http.Handler {
+	return httpStats.Handler(
+		handlers.CombinedLoggingHandler(os.Stdout,
+			handlers.CompressHandler(
+				ForwardedHandler(h))))
+}
 
 //Submit takes an Entry and commits it to the DB
 func Submit(rw http.ResponseWriter, r *http.Request) {
@@ -30,15 +61,7 @@ func Submit(rw http.ResponseWriter, r *http.Request) {
 	if len(addr) == 0 {
 		log.Panicln("No Remote Address set")
 	}
-	if ip := r.Header.Get("X-Forwarded-For"); ip != "" {
-		e.InternetIP = ip
-	} else {
-		addr := strings.Split(r.RemoteAddr, ":")
-		if len(addr) == 0 {
-			log.Panicln("No Remote Address set")
-		}
-		e.InternetIP = addr[0]
-	}
+	e.InternetIP = addr[0]
 	e.Time = time.Now()
 
 	err = Commit(e)
@@ -59,5 +82,5 @@ func routesInit() {
 	r := mux.NewRouter()
 	r.Handle(apiPrefix+"/submit", http.HandlerFunc(Submit)).Methods("POST")
 	r.Handle("/stats", http.HandlerFunc(StatsHandler)).Methods("GET")
-	router = httpStats.Handler(handlers.CompressHandler(handlers.CombinedLoggingHandler(os.Stdout, r)))
+	router = middleware(r)
 }
