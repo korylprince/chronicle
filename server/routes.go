@@ -4,6 +4,7 @@ import (
 	"encoding/json"
 	"fmt"
 	"log"
+	"net"
 	"net/http"
 	"os"
 	"strings"
@@ -27,13 +28,13 @@ func ForwardedHandler(h http.Handler) http.Handler {
 }
 
 func (h forwardedHandler) ServeHTTP(rw http.ResponseWriter, r *http.Request) {
-	addr := strings.Split(r.RemoteAddr, ":")
-	if len(addr) != 2 {
-		log.Panicln("No Remote Address set")
+	_, port, err := net.SplitHostPort(r.RemoteAddr)
+	if err != nil {
+		log.Panicln("Error parsing Remote Address:", err)
 	}
 
 	if ip := r.Header.Get("X-Forwarded-For"); ip != "" {
-		r.RemoteAddr = fmt.Sprintf("%s:%s", ip, addr)
+		r.RemoteAddr = fmt.Sprintf("%s:%s", ip, port)
 	}
 
 	h.chain.ServeHTTP(rw, r)
