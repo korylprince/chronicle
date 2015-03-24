@@ -16,6 +16,7 @@ func statsInit() {
 	fmt.Println(httpStats.Data())
 }
 
+//StatsHandler returns the current stats
 func StatsHandler(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Content-Type", "application/json")
 	e := json.NewEncoder(w)
