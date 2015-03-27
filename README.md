@@ -1,4 +1,6 @@
-[chronicle](https://github.com/korylprince/chonicle)
+[chronicle](https://github.com/korylprince/chronicle)
+
+## This repo is now obsolete. The [server](https://github.com/korylprince/chronicle-server) and [client](https://github.com/korylprince/chronicle-client) have been split into their own repos. This repo will be archived for history's sake.
 
 chronicle is for simple client/server data logging to a database.
 The client will send the following data:
